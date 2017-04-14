@@ -1,6 +1,6 @@
 # Polymer State Manager
 
-Used Polymer Starter Kit to create a simple state management system using behaviors.
+Used [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) to create a simple state management system using behaviors.
 
 ### Setup
 
