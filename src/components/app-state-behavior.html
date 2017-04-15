@@ -1,51 +1,19 @@
-<link rel="import" href="./ramda.html">
-
 <script>
   /**
   * @polymerBehavior
   */
   AppStateBehavior = {
-
+    // properties
     properties: {
-      // singular key with value of N number of key/value pairs
-      state: {
-        type: Object,
-        value: function() {
-          return {
-            // app state properties go here
-            currentPage: 'view-state',
-            test: 'Testing 1, 2, 3...'
-          }
-        },
-      }
+      state: Object
     },
-
+    // listeners
     listeners: {
-      'get-state': 'getState',
       'update-state': 'updateState',
     },
-
-    observers: [
-      '_stateChanged(state)'
-    ],
-
-    _stateChanged: function(state) {
-      console.warn('State changed', state);
-    },
-
-    attached: function() {
-      const stateEvent = this.fire('get-state');
-      this.state = R.pathOr({}, ['srcElement', '__data__', 'state'], stateEvent);
-    },
-
-    getState: function(evt) {
-      return evt;
-    },
-
+    // methods
     updateState: function(e, updatedState) {
       this.state = Object.assign({}, this.state, updatedState);
-      console.warn('Updated state', this.state);
-    },
-
+    }
   }
 </script>

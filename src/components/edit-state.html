@@ -27,21 +27,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <ul>
         <li>currentPage: <input id="curPage" value$="[[state.test]]" /> <button on-tap="_updateTestValue">Update</button></li>
       </ul>
-      <nested-state app-state="[[state]]"></nested-state>
+      <nested-state state="[[state]]"></nested-state>
     </div>
   </template>
 
   <script>
     Polymer({
       is: 'edit-state',
-
-      properties: {
-        state: Object
-      },
-
-      behaviors: [
-        AppStateBehavior
-      ],
 
       _updateTestValue: function() {
         this.fire('update-state', {test: this.$.curPage.value});

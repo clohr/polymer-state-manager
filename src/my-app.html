@@ -92,8 +92,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view-404"
             role="main">
-          <view-state name="view-state"></view-state>
-          <edit-state name="edit-state"></edit-state>
+          <view-state name="view-state" state="[[state]]"></view-state>
+          <edit-state name="edit-state" state="[[state]]"></edit-state>
           <view-404 name="view-404"></view-404>
         </iron-pages>
       </app-header-layout>
@@ -117,8 +117,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ],
 
       observers: [
-        '_routePageChanged(routeData.page)',
+        '_routePageChanged(routeData.page)'
       ],
+
+      attached: function() {
+        // set initial state for app
+        this.set('state', {
+          // app state properties go here
+          currentPage: 'view-state',
+          test: 'Testing 1, 2, 3...'
+        });
+      },
 
       _routePageChanged: function(page) {
         this.page = page || this.state.currentPage;
