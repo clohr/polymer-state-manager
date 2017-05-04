@@ -10,7 +10,8 @@ First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
 [npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
 
     npm install -g polymer-cli
-    
+    npm i && bower install
+
 ### Start the development server
 
 This command serves the app at `http://localhost:3000` using [browser-sync](https://www.browsersync.io/) and provides basic URL
