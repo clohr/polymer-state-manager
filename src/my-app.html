@@ -108,11 +108,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page: {
           type: String,
           reflectToAttribute: true,
-          observer: '_pageChanged',
-          value: 'view-state'
+          observer: '_pageChanged'
         }
       },
 
+      // AppStateBehavior only needs to be in root because all properties propagate from the top down
       behaviors: [
         AppStateBehavior
       ],
@@ -121,17 +121,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         '_routePageChanged(routeData.page)'
       ],
 
-      attached: function() {
+      ready: function() {
         // set initial state for app
         this.set('state', {
-          // app state properties go here
           currentPage: 'view-state',
           test: 'Testing 1, 2, 3...'
         });
       },
 
       _routePageChanged: function(page) {
-        this.page = page || this.state.currentPage;
+        this.set('page', page || 'view-state');
 
         if (!this.$.drawer.persistent) {
           this.$.drawer.close();

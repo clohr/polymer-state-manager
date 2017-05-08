@@ -35,8 +35,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: 'edit-state',
 
+      listeners: {
+        'keydown': '_submitForm'
+      },
+
+      _submitForm: function(evt) {
+        if (evt.target.id !== 'curPage' && evt.keyCode !== 13) {
+          return;
+        }
+        this.fire('update-state', { test: evt.target.$$('#curPage').value });
+      },
+
       _updateTestValue: function() {
-        this.fire('update-state', {test: this.$.curPage.value});
+        this.fire('update-state', { test: this.$.curPage.value });
       },
     });
   </script>

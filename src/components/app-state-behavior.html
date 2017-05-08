@@ -3,17 +3,25 @@
   * @polymerBehavior
   */
   AppStateBehavior = {
-    // properties
+
     properties: {
+      // application state object
       state: Object
     },
-    // listeners
+
+
     listeners: {
       'update-state': 'updateState',
     },
-    // methods
+
+    /**
+     * updates application state object by merging on or more objects to state
+     * @param {Object} Event object
+     * @param {Object} Updated state
+     */
     updateState: function(e, updatedState) {
-      this.state = Object.assign({}, this.state, updatedState);
-    }
+      this.set('state', Object.assign({}, this.state, updatedState));
+    },
+
   }
 </script>
