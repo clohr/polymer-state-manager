@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="./app-state-aware-behavior.html">
 <link rel="import" href="./nested-state.html">
 <link rel="import" href="./shared-styles.html">
 
@@ -30,7 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <li>Last Name: <input id="lastName" value$="[[state.name.last]]" /></li>
       </ul>
       <button on-tap="_updateTestValue">Update</button>
-      <nested-state state="[[state]]"></nested-state>
+      <nested-state></nested-state>
     </div>
   </template>
 
@@ -38,8 +39,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: 'edit-state',
 
+      behaviors: [
+        AppStateAwareBehavior,
+      ],
+
       listeners: {
-        'keydown': '_submitForm'
+        'keydown': '_submitForm',
       },
 
       _getFormValues: function() {
@@ -48,7 +53,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           name: {
             first: this.$.firstName.value,
             last: this.$.lastName.value,
-          }
+          },
         }
       },
 

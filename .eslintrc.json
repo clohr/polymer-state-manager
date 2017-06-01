@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "google"],
+  "extends": ["eslint:recommended", "google", "es2015"],
   "env": {
     "browser": true
   },
@@ -8,6 +8,9 @@
   ],
   "rules": {
     "no-var": "off",
+    "semi": "off",
+    "no-undef": "off",
+    "max-len": 0,
     "new-cap": ["error", { "capIsNewExceptions": ["Polymer"] }]
   },
   "globals": {

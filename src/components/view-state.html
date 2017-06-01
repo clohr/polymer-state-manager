@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="./app-state-behavior.html">
+<link rel="import" href="./app-state-aware-behavior.html">
 <link rel="import" href="./shared-styles.html">
 
 <dom-module id="view-state">
@@ -36,6 +36,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     Polymer({
       is: 'view-state',
+      behaviors: [
+        AppStateAwareBehavior,
+      ],
     });
   </script>
 </dom-module>

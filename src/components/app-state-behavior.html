@@ -1,27 +1,45 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="app-state-aware-behavior.html">
+
 <script>
-  /**
-  * @polymerBehavior
-  */
-  AppStateBehavior = {
+  AppStateBehaviorImpl = {
+
+    observers: [
+      'notifyStateElements(state.*)',
+    ],
 
     properties: {
       // application state object
-      state: Object
+      state: Object,
     },
-
 
     listeners: {
       'update-state': 'updateState',
     },
 
-    /**
-     * updates application state object by merging on or more objects to state
-     * @param {Object} Event object
-     * @param {Object} Updated state
-     */
-    updateState: function(e, updatedState) {
-      this.set('state', Object.assign({}, this.state, updatedState));
+    notifyStateElements: function(change) {
+      this.get('application.stateElements').forEach((el) => {
+        el.notifyPath(change.path, change.value, true)
+      })
     },
 
+    /**
+     * updates application state object by merging on or more objects to state
+     * @param {Object} e
+     * @param {Object} updatedState
+     */
+    updateState: function(e, updatedState) {
+      this.set('state', Object.assign({}, this.state, updatedState))
+    },
+
+    ready: function() {
+      this.set('application.root', this);
+    },
   }
+
+  /** @polymerBehavior */
+  AppStateBehavior = [
+    AppStateBehaviorImpl,
+    AppStateAwareBehavior,
+  ]
 </script>

@@ -92,8 +92,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view-404"
             role="main">
-          <view-state name="view-state" state="[[state]]"></view-state>
-          <edit-state name="edit-state" state="[[state]]"></edit-state>
+          <view-state name="view-state"></view-state>
+          <edit-state name="edit-state"></edit-state>
           <view-404 name="view-404"></view-404>
         </iron-pages>
       </app-header-layout>
@@ -108,17 +108,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page: {
           type: String,
           reflectToAttribute: true,
-          observer: '_pageChanged'
-        }
+          observer: '_pageChanged',
+        },
       },
 
       // AppStateBehavior only needs to be in root because all properties propagate from the top down
       behaviors: [
-        AppStateBehavior
+        AppStateBehavior,
       ],
 
       observers: [
-        '_routePageChanged(routeData.page)'
+        '_routePageChanged(routeData.page)',
       ],
 
       ready: function() {
@@ -128,8 +128,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           test: 'Testing 1, 2, 3...',
           name: {
             first: 'Christian',
-            last: 'Lohr'
-          }
+            last: 'Lohr',
+          },
         });
       },
 
