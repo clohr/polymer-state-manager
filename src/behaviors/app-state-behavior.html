@@ -1,0 +1,96 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="app-state-aware-behavior.html">
+
+<script>
+  /**
+  Assign this behavior to your main application element. It provides global
+  state and functionality to maintain individual elements states. This behavior
+  is responsible for notifying all state-aware elements about their state
+  changes (provided those elements have `statePath` property defined).
+  Only one element in the application is supposed to have this behavior.
+
+  ### Example:
+
+  #### HTML:
+     <template>
+       <!-- state-aware elements -->
+       <some-element></some-element>
+     </template>
+
+  #### JavaScript:
+     Polymer({
+       is: 'my-app',
+       behaviors: [
+         AppStateBehavior
+       ],
+       attached() {
+         this.state = {
+           someElement: {}
+         }
+       }
+     });
+
+  In the example above, `<some-element>` will receive notification of any changes to the state,
+  as if it was declared as follows:
+     <some-element state="[[state]]"></some-element>
+  Also, if `<some-element>` has `propertyA`, on element attach this property will be assigned
+  the value of `state.someElement.propertyA`, and receive all notification of the property change
+  whenever the corresponding data in state tree changes. This essentially translates to following
+  declaration:
+     <some-element state="[[state]]"
+                   propertyA="[[state.someElement.propertyA]]">
+     </some-element>
+  Note that data binding is one-way in both cases. Although state-aware elements can modify their
+  own state, it is considered their private state and no other elements will be notified of those
+  changes.
+
+  @polymerBehavior AppStateBehavior
+  */
+  AppStateBehaviorImpl = {
+
+    observers: [
+      '_notifyStateElements(state.*)',
+    ],
+
+    listeners: {
+      'update-state': 'updateState',
+    },
+
+    /**
+    * Iterates through the array of state-aware elements in the application
+    * and notifies them about their state change, if applicable. Note that
+    * state-aware elements must be attached to DOM tree in order to receive
+    * notifications.
+    *
+    * @param {Object} change
+    */
+    _notifyStateElements: function(change) {
+      this.get('application.stateElements').forEach((el) => {
+        el.notifyPath(change.path, change.value, true)
+      })
+    },
+
+    /**
+     * updates application state object by merging on or more objects to state
+     * @param {Object} e
+     * @param {Object} updatedState
+     */
+    updateState: function(e, updatedState) {
+      this.set('state', Object.assign({}, this.state, updatedState))
+    },
+
+    /**
+     * Sets application.element value to this element (so all state-aware elements
+     * have access to application element).
+     */
+    ready: function() {
+      this.set('application.root', this);
+    },
+  }
+
+  /** @polymerBehavior */
+  AppStateBehavior = [
+    AppStateBehaviorImpl,
+    AppStateAwareBehavior,
+  ]
+</script>
