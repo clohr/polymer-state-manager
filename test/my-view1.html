@@ -14,32 +14,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>my-view1</title>
+    <title>view-state tests</title>
 
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
 
     <!-- Import the element to test -->
-    <link rel="import" href="../src/my-view1.html">
+    <link rel="import" href="../src/components/view-state.html">
   </head>
   <body>
     <test-fixture id="basic">
       <template>
-        <my-view1></my-view1>
+        <view-state></view-state>
       </template>
     </test-fixture>
 
     <script>
-      suite('my-view1 tests', function() {
-        var home;
+      suite('view-state tests', function() {
+        let home;
 
         setup(function() {
           home = fixture('basic');
         });
 
         test('Number in circle should be 1', function() {
-          var circle = Polymer.dom(home.root).querySelector('.circle');
+          const circle = home.$$('.circle');
           assert.equal(circle.textContent, '1');
+        });
+
+        test('Title should be correct', function() {
+          const title = home.$$('h1');
+          assert.equal(title.textContent, 'View State');
+        });
+
+        test('Number of list items should be 4', function() {
+          const numLIs = Polymer.dom(home.root).querySelectorAll('li').length;
+          assert.equal(numLIs, 4);
         });
       });
     </script>
