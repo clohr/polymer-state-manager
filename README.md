@@ -1,6 +1,6 @@
 # Polymer State Manager
 
-Used [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) to create a simple state management system using behaviors.
+Simplified fork of [Uniflow](https://github.com/google/uniflow-polymer) along with [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) to create a simple state management system using behaviors. If you are looking for a more robust state management feature, I would recommend either [Uniflow](https://github.com/google/uniflow-polymer) or [Polymer Redux](https://github.com/tur-nr/polymer-redux). 
 
 ### Setup
 
